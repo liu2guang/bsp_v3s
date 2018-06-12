@@ -1,0 +1,1 @@
+.\tools\sunxi-fel.exe uboot .\tools\rtthread-with-spl.bin

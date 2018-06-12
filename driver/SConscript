@@ -1,0 +1,67 @@
+# RT-Thread building script for component
+
+from building import *
+
+cwd     = GetCurrentDir()
+
+src = Split("""
+board.c
+romfs.c
+""")
+gpiodev = Split("""
+drv_gpio.c
+""")
+uartdev = Split("""
+drv_uart.c
+""")
+emacdev = Split("""
+drv_emac.c
+""")
+spidev = Split("""
+drv_spi.c
+""")
+tfdev = Split("""
+drv_tf.c
+""")
+rtcdev = Split("""
+drv_rtc.c
+""")
+i2cdev = Split("""
+drv_i2c.c
+""")
+wdtdev = Split("""
+drv_wdt.c
+""")
+pwmdev = Split("""
+drv_pwm.c
+""")
+lcddev = Split("""
+drv_lcd.c
+""")
+
+if GetDepend(['RT_USING_SERIAL']):
+    src += uartdev
+if GetDepend(['RT_USING_PIN']):
+    src += gpiodev
+if GetDepend(['RT_USING_SPI']):
+    src += spidev
+if GetDepend(['RT_USING_LWIP']):
+    src += emacdev
+if GetDepend(['RT_USING_SDIO']):
+    src += tfdev
+if GetDepend(['RT_USING_RTC']):
+    src += rtcdev
+if GetDepend(['RT_USING_I2C']):
+    src += i2cdev
+if GetDepend(['RT_USING_WDT']):
+    src += wdtdev
+if GetDepend(['RT_USING_PWM']):
+    src += pwmdev
+if GetDepend(['RT_USING_LCD']):
+    src += lcddev
+
+CPPPATH = [cwd]
+
+group = DefineGroup('Drivers', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')
