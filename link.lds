@@ -5,7 +5,7 @@ SECTIONS
 {
     . = 0x43000000;
 
-    __text_start = .;
+    _stext = .;
     .text :
     {
         *(.vectors)
@@ -35,7 +35,11 @@ SECTIONS
         KEEP(*(SORT(.rti_fn*)))
         __rt_init_end = .;
     } =0
-    __text_end = .;
+    _etext = .;
+
+    __exidx_start = .;
+    .ARM.exidx   : { *(.ARM.exidx* .gnu.linkonce.armexidx.*) }
+    __exidx_end = .;
 
     __rodata_start = .;
     .rodata   : { *(.rodata) *(.rodata.*) }

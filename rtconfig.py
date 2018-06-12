@@ -23,7 +23,7 @@ else:
 if os.getenv('RTT_EXEC_PATH'):
     EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
-BUILD = 'release'
+BUILD = 'debug'
 
 if PLATFORM == 'gcc':
     # toolchains
@@ -38,7 +38,7 @@ if PLATFORM == 'gcc':
     OBJDUMP = PREFIX + 'objdump'
     OBJCPY  = PREFIX + 'objcopy'
 
-    DEVICE  = ' -march=armv7-a -mtune=cortex-a7 -ftree-vectorize -ffast-math -mfloat-abi=softfp'
+    DEVICE  = ' -march=armv7-a -mtune=cortex-a7 -ftree-vectorize -ffast-math -mfloat-abi=softfp -msoft-float'
     DEVICE += ' -ffunction-sections -fdata-sections -fno-common -mno-unaligned-access -DCONFIG_USE_STDINT'
     DEVICE += ' -Iinclude -D__KERNEL__ -D__UBOOT__ -D__ARM__ -D__LINUX_ARM_ARCH__=7 -include include/linux/kconfig.h'
     CFLAGS  = DEVICE + ' -Wall -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable' 
