@@ -2,10 +2,15 @@ import os
 import sys
 import rtconfig
 
-from rtconfig import RTT_ROOT
+RTT_ROOT = os.path.normpath(os.getcwd() + '/rt-thread')
 
 sys.path = sys.path + [os.path.join(RTT_ROOT, 'tools')]
-from building import *
+try:
+    from building import *
+except:
+    print('Cannot found RT-Thread root directory, please check RTT_ROOT')
+    print(RTT_ROOT)
+    exit(-1)
 
 TARGET = 'rtthread.' + rtconfig.TARGET_EXT
 
