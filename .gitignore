@@ -3,7 +3,6 @@
 /*.old
 /.config
 /.sconsign.dblite
-/rtconfig.h
 /rtthread.bin
 /rtthread.elf
 /rtthread.map
